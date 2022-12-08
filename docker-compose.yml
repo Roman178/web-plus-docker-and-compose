@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  backend:
+    depends_on:
+      - postgres
+    build: './backend'
+    image: "kpdbackend"
+    ports:
+      - "4000:3001"
+    links:
+      - postgres
+    networks:
+      - internal-network
+      - internet
+    restart: on-failure
+  frontend:
+    depends_on:
+      - backend
+    build: './frontend'
+    image: "kpdfrontend"
+    ports:
+      - '8081:80'
+  postgres:
+    image: postgres
+    env_file:
+      - ./.env
+    volumes:
+      - ./pg-data:${PGDATA}
+    networks:
+      - internal-network
+    restart: on-failure
+    ports:
+      - "5432:5432"
+networks:
+  internal-network:
+    driver: bridge
+    internal: true
+  internet:
+    driver: bridge
