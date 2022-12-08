@@ -1,4 +1,4 @@
-export const URL = "http://api.roman-docker.nomoredomains.club";
+export const URL = "https://api.roman-docker.nomoredomains.club";
 
 export const MINIMUM_PASSWORD_LENGTH = 3;
 export const MINIMUM_USERNAME_LENGTH = 3;
